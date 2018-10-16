@@ -2,6 +2,8 @@ module Data.Lambda.Simple where
 
 type TypeVname = String
 type Vname = String
+data Lambda = Lambda ([String], String)
+type Lambdas = [Lambda]
 
 data Type = TypeVar TypeVname
           | Arrow Type Type deriving Eq
