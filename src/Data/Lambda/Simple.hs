@@ -37,9 +37,9 @@ data Lambda = Lambda ([String], String)
 type Lambdas = [Lambda]
 
 showLambda :: Lambda -> String
-showLambda (Lambda (inputs, output)) = concat ["(", concat (map convLambdaVar inputs), output, ")"] where
-    convLambdaVar :: String -> String
-    convLambdaVar = \x -> "\\" ++ x ++ " -> "
+showLambda (Lambda (inputs, output)) = concat ["(", convLambdaVar inputs, output, ")"] where
+    convLambdaVar :: [String] -> String
+    convLambdaVar xs = concat $ map (\x -> "\\" ++ x ++ " -> ") xs
 instance Show Lambda where
   show = showLambda
 
