@@ -2,8 +2,6 @@ module Data.Lambda.Simple where
 
 type TypeVname = String
 type Vname = String
-data Lambda = Lambda ([String], String)
-type Lambdas = [Lambda]
 
 data Type = TypeVar TypeVname
           | Arrow Type Type deriving Eq
@@ -33,3 +31,16 @@ showExpr (App e1 e2) = concat
 
 instance Show Expr where
   show = showExpr
+
+
+data Lambda = Lambda ([String], String)
+type Lambdas = [Lambda]
+
+showLambda :: Lambda -> String
+showLambda (Lambda (inputs, output)) = concat ["(", concat (map convLambdaVar inputs), output, ")"] where
+    convLambdaVar :: String -> String
+    convLambdaVar = \x -> "\\" ++ x ++ " -> "
+instance Show Lambda where
+  show = showLambda
+
+
